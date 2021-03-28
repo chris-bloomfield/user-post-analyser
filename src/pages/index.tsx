@@ -3,6 +3,7 @@ import React, { ReactElement } from 'react'
 import { GetStaticProps } from 'next'
 import { GraphQLClient } from 'graphql-request'
 import { POSTS, PostType } from '../graphql/posts'
+import StackedBarGraph from '../components/StackedBarGraph'
 
 const GRAPHQL_ENDPOINT = process.env.GRAPHQL_ENDPOINT || ''
 
@@ -14,6 +15,7 @@ const Home = ({ data }: Props): ReactElement => (
     </Head>
     <main>
       <h1>User Post Analyser</h1>
+      <StackedBarGraph width={800} height={480} data={data.allPosts} />
     </main>
     <style jsx>{`
       h1 {
