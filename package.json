@@ -8,7 +8,9 @@
     "start": "next start"
   },
   "dependencies": {
+    "@visx/axis": "^1.7.0",
     "@visx/group": "^1.7.0",
+    "@visx/legend": "^1.7.0",
     "@visx/scale": "^1.7.0",
     "@visx/shape": "^1.7.0",
     "d3-scale-chromatic": "^2.0.0",

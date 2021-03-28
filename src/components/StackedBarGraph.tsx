@@ -5,6 +5,8 @@ import { schemeSpectral } from 'd3-scale-chromatic'
 import { BarStackHorizontal } from '@visx/shape'
 import { Group } from '@visx/group'
 import { scaleBand, scaleLinear, scaleOrdinal } from '@visx/scale'
+import { AxisBottom, AxisLeft } from '@visx/axis'
+import { LegendOrdinal } from '@visx/legend'
 
 const LIKELY_TOPICS = [
   'community',
@@ -20,7 +22,7 @@ const LIKELY_TOPICS = [
 ]
 
 const StackedBarGraph = ({ width, height, data }: Props): ReactElement => {
-  const margin = { top: 40, left: 40, right: 40, bottom: 40 }
+  const margin = { top: 40, left: 120, right: 40, bottom: 60 }
 
   // Create an object with a key for each user containing an array of posts
   const postsGroupedByUser = groupBy(path(['author', 'id']))(data)
@@ -79,8 +81,11 @@ const StackedBarGraph = ({ width, height, data }: Props): ReactElement => {
 
   return (
     <div>
+      <div>
+        <span className="legend">Likely post category:</span>
+        <LegendOrdinal scale={colorScale} direction="row" labelMargin="5px 20px 5px 5px" />
+      </div>
       <svg width={width} height={height}>
-        <rect width={width} height={height} fill={'#eaedff'} rx={14} />
         <Group top={margin.top} left={margin.left}>
           <BarStackHorizontal
             data={barStackData}
@@ -106,8 +111,41 @@ const StackedBarGraph = ({ width, height, data }: Props): ReactElement => {
               )
             }
           </BarStackHorizontal>
+          <AxisLeft
+            hideTicks
+            scale={userScale}
+            stroke={'grey'}
+            tickStroke={'grey'}
+            tickLabelProps={() => ({
+              fill: 'grey',
+              fontSize: 12,
+              textAnchor: 'end',
+              dy: '0.33em',
+            })}
+          />
+          <AxisBottom
+            top={yMax}
+            scale={postsScale}
+            label={'Number of posts'}
+            labelProps={{
+              fill: 'grey',
+              fontSize: 14,
+            }}
+            stroke={'grey'}
+            tickStroke={'grey'}
+            tickLabelProps={() => ({
+              fill: 'grey',
+              fontSize: 12,
+              textAnchor: 'middle',
+            })}
+          />
         </Group>
       </svg>
+      <style jsx>{`
+        .legend {
+          font-weight: bold;
+        }
+      `}</style>
     </div>
   )
 }

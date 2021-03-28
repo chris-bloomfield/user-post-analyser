@@ -19,7 +19,7 @@ const Home = ({ data }: Props): ReactElement => (
     </main>
     <style jsx>{`
       h1 {
-        margin: 0;
+        margin: 0 0 24px;
       }
     `}</style>
   </div>
