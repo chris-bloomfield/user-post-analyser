@@ -1,8 +1,21 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+A utility to visualise users and their posting topic habits based on sample GraphQL data.
 
-## Getting Started
+## Design choices
 
-First, run the development server:
+I built the site using the [Next.js](https://nextjs.org/) framework - partly because of past familiarity with it, and also because it is a able to render the data quickly as a static page, while revalidating it on the sever-side for future requests - a good combination of static-rendering speed and up-to-date data fetching that would suit this use-case.
+
+For the GraphQL fetching I used `graphql-request` since this is a simple tool that is adequate for fetching the required data.  Would consider replacing with Apollo if the site grew to contain data that neeeded to be cached / updated during the user's visit.
+
+The data visualisation is a visx stacked bar graph since this provided a good way of visualising the breakdown of a user's posts that accounted for the weighted nature of the data, as well as taking advantage of the fact that there are a set number of post categories.
+
+## Challenges
+
+Visx is still a fairly new library to me, so the first challenge was finding my way round the examples and documentation in order to create the visualisation I had in mind.  Transforming the GraphQL data into a format usable by the Visx components was also an interesting challenge - and probably somewhere that I'd look to make the code a little easier to understand if I was to continue working on this.
+
+One thought on the API would be that the `createdAt` dates would be easier to work with (and easier to read at a glance while looking at the GraphQL data) if they were in ISO format.  Also the [uifaces](https://uifaces.com/) image set used for the user avatars seem to have been taken offline.
+
+
+## To run locally
 
 ```bash
 npm run dev
@@ -10,21 +23,4 @@ npm run dev
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Open [http://localhost:3000](http://localhost:3000) in a browser.

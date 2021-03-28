@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react'
 import { PostType } from '../graphql/posts'
 import { groupBy, path } from 'ramda'
+import dayjs from 'dayjs'
 import { schemeSpectral } from 'd3-scale-chromatic'
 import { BarStackHorizontal } from '@visx/shape'
 import { Group } from '@visx/group'
@@ -115,6 +116,7 @@ const StackedBarGraph = ({ width, height, data }: Props): ReactElement => {
             hideTicks
             scale={userScale}
             stroke={'grey'}
+            numTicks={barStackData.length}
             tickStroke={'grey'}
             tickLabelProps={() => ({
               fill: 'grey',

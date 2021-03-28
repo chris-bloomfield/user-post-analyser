@@ -3,6 +3,7 @@ import { gql } from 'graphql-request'
 export const POSTS = gql`
   query posts {
     allPosts(count: 500) {
+      createdAt
       author {
         id
         firstName
@@ -17,6 +18,7 @@ export const POSTS = gql`
 `
 
 export interface PostType {
+  createdAt: string
   author: {
     id: string
     firstName: string
