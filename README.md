@@ -28,4 +28,3 @@ yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in a browser.
-<img width="1080" alt="screenshot" src="https://user-images.githubusercontent.com/13033041/112771291-05c53f00-9023-11eb-9798-81f26edb81e2.png">
