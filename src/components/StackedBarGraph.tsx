@@ -1,7 +1,6 @@
 import React, { ReactElement } from 'react'
 import { PostType } from '../graphql/posts'
 import { groupBy, path } from 'ramda'
-import dayjs from 'dayjs'
 import { schemeSpectral } from 'd3-scale-chromatic'
 import { BarStackHorizontal } from '@visx/shape'
 import { Group } from '@visx/group'
@@ -29,23 +28,25 @@ const StackedBarGraph = ({ width, height, data }: Props): ReactElement => {
   const postsGroupedByUser = groupBy(path(['author', 'id']))(data)
 
   // Reduce each user's posts to a single set of accumulated topic values
-  const barStackData = Object.keys(postsGroupedByUser).map((key) =>
-    postsGroupedByUser[key].reduce(
-      (p, currentPost) => ({
-        name: p.name || `${currentPost.author.firstName} ${currentPost.author.lastName}`,
-        ...LIKELY_TOPICS.reduce(
-          (t, currentTopic) => ({
-            ...t,
-            [currentTopic]:
-              currentPost.likelyTopics.find((p) => p.label === currentTopic).likelihood +
-              (p[currentTopic] || 0),
-          }),
-          {}
-        ),
-      }),
-      []
+  const barStackData = Object.keys(postsGroupedByUser)
+    .sort()
+    .map((key) =>
+      postsGroupedByUser[key].reduce(
+        (p, currentPost) => ({
+          name: p.name || `${currentPost.author.firstName} ${currentPost.author.lastName}`,
+          ...LIKELY_TOPICS.reduce(
+            (t, currentTopic) => ({
+              ...t,
+              [currentTopic]:
+                currentPost.likelyTopics.find((p) => p.label === currentTopic).likelihood +
+                (p[currentTopic] || 0),
+            }),
+            {}
+          ),
+        }),
+        []
+      )
     )
-  )
 
   const keys = LIKELY_TOPICS.sort()
 
