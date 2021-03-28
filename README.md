@@ -1,5 +1,7 @@
 A utility to visualise users and their posting topic habits based on sample GraphQL data.
 
+![screenshot](https://user-images.githubusercontent.com/13033041/112771296-0c53b680-9023-11eb-989f-4acacfcb59c7.png)
+
 ## Design choices
 
 I built the site using the [Next.js](https://nextjs.org/) framework - partly because of past familiarity with it, and also because it is a able to render the data quickly as a static page, while revalidating it on the sever-side for future requests - a good combination of static-rendering speed and up-to-date data fetching that would suit this use-case.
@@ -17,6 +19,8 @@ One thought on the API would be that the `createdAt` dates would be easier to wo
 
 ## To run locally
 
+Create a `.env` file based on `.env.example`
+
 ```bash
 npm run dev
 # or
@@ -24,3 +28,4 @@ yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in a browser.
+<img width="1080" alt="screenshot" src="https://user-images.githubusercontent.com/13033041/112771291-05c53f00-9023-11eb-9798-81f26edb81e2.png">
