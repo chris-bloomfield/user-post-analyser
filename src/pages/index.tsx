@@ -43,7 +43,7 @@ const Home = ({ data }: Props): ReactElement => {
             onClick={() => {
               setDate((prevDate) => dayjs(prevDate).add(1, 'month'))
             }}
-            disabled={dayjs(Number(latestDate)).isSame(date)}
+            disabled={dayjs(Number(latestDate)).isSame(date, 'month')}
           >
             Forward a month &gt;
           </button>
